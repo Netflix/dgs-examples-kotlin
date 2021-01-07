@@ -31,8 +31,7 @@ import kotlin.streams.toList
 @DgsComponent
 class ArtworkUploadDataFetcher {
     @DgsData(parentType = DgsConstants.Mutation_TYPE, field = DgsConstants.MUTATION.AddArtwork)
-    fun uploadArtwork(@InputArgument("showId") showId: Int, dfe: DataFetchingEnvironment): List<Image> {
-        val multipartFile = dfe.getArgument<MultipartFile>("upload")
+    fun uploadArtwork(@InputArgument("showId") showId: Int, @InputArgument("upload") multipartFile: MultipartFile): List<Image> {
         val uploadDir = Paths.get("uploaded-images")
         if (!Files.exists(uploadDir)) {
             Files.createDirectories(uploadDir)
