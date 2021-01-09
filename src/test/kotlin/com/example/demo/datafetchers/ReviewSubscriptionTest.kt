@@ -23,6 +23,7 @@ import com.example.demo.generated.types.SubmittedReview
 import com.example.demo.scalars.DateTimeScalarRegistration
 import com.example.demo.services.DefaultReviewsService
 import com.example.demo.services.ShowsService
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.netflix.graphql.dgs.DgsQueryExecutor
 import com.netflix.graphql.dgs.autoconfig.DgsAutoConfiguration
 import com.netflix.graphql.dgs.client.codegen.GraphQLQueryRequest
@@ -63,7 +64,8 @@ class ReviewSubscriptionTest {
             }
 
             override fun onNext(t: ExecutionResult) {
-                reviews.add(t.getData())
+                val data = t.getData<Map<String, Any>>()
+                reviews.add(jacksonObjectMapper().convertValue(data["reviewAdded"], Review::class.java))
             }
 
             override fun onError(t: Throwable?) {

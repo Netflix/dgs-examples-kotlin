@@ -61,7 +61,6 @@ class ReviewsDataFetcher(private val reviewsService: ReviewsService) {
 
     @DgsData(parentType = DgsConstants.Subscription_TYPE, field = DgsConstants.SUBSCRIPTION.ReviewAdded)
     fun reviewAddedSubscription(@InputArgument("showId") showId: Int): Publisher<Review> {
-        val reviewsPublisher = reviewsService.getReviewsPublisher()
-        return reviewsPublisher
+        return reviewsService.getReviewsPublisher()
     }
 }
