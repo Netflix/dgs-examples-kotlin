@@ -34,7 +34,9 @@ repositories {
 }
 
 dependencies {
-	api("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:3.1.1")
+    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release"))
+
+	api("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
 
 	implementation("com.graphql-java:graphql-java-extended-scalars:1.0")
 	implementation("com.github.javafaker:javafaker:1.+")
