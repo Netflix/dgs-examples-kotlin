@@ -22,10 +22,7 @@ import com.example.demo.generated.types.Review
 import com.example.demo.generated.types.Show
 import com.example.demo.generated.types.SubmittedReview
 import com.example.demo.services.ReviewsService
-import com.netflix.graphql.dgs.DgsComponent
-import com.netflix.graphql.dgs.DgsData
-import com.netflix.graphql.dgs.DgsDataFetchingEnvironment
-import com.netflix.graphql.dgs.InputArgument
+import com.netflix.graphql.dgs.*
 import org.dataloader.DataLoader
 import org.reactivestreams.Publisher
 import java.util.concurrent.CompletableFuture
@@ -52,15 +49,15 @@ class ReviewsDataFetcher(private val reviewsService: ReviewsService) {
         return reviewsDataLoader.load(show.id)
     }
 
-    @DgsData(parentType = DgsConstants.Mutation_TYPE, field = DgsConstants.MUTATION.AddReview)
-    fun addReview(@InputArgument("review") reviewInput: SubmittedReview): List<Review> {
-        reviewsService.saveReview(reviewInput)
+    @DgsMutation
+    fun addReview(@InputArgument review: SubmittedReview): List<Review> {
+        reviewsService.saveReview(review)
 
-        return reviewsService.reviewsForShow(reviewInput.showId)?: emptyList()
+        return reviewsService.reviewsForShow(review.showId)?: emptyList()
     }
 
-    @DgsData(parentType = DgsConstants.Subscription_TYPE, field = DgsConstants.SUBSCRIPTION.ReviewAdded)
-    fun reviewAddedSubscription(@InputArgument("showId") showId: Int): Publisher<Review> {
+    @DgsSubscription
+    fun reviewAdded(@InputArgument showId: Int): Publisher<Review> {
         return reviewsService.getReviewsPublisher()
     }
 }

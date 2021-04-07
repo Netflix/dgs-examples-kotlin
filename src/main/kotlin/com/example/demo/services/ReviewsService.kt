@@ -69,7 +69,7 @@ class DefaultReviewsService(private val showsService: ShowsService): ReviewsServ
                 )
             }.toList().toMutableList()
 
-            reviews[show.id!!] = generatedReviews
+            reviews[show.id] = generatedReviews
         }
 
         val publisher = Flux.create<Review> { emitter ->
