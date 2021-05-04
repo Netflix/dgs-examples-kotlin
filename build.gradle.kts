@@ -34,15 +34,13 @@ repositories {
 
 dependencies {
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release"))
-
-	api("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
-
-	implementation("com.graphql-java:graphql-java-extended-scalars:1.0")
-	implementation("com.github.javafaker:javafaker:1.+")
-
-	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
+    implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
+    implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("com.github.javafaker:javafaker:1.+")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
