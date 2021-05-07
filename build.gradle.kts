@@ -17,11 +17,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.4.5"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.4.32"
-    id("com.netflix.dgs.codegen") version "4.6.4"
     kotlin("plugin.spring") version "1.5.0"
+    id("com.netflix.dgs.codegen") version "4.6.4"
+    id("org.springframework.boot") version "2.4.5"
 }
 
 group = "com.example"
