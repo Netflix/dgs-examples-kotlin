@@ -23,12 +23,19 @@ import com.example.demo.generated.types.Show
 import com.example.demo.generated.types.SubmittedReview
 import com.example.demo.services.ReviewsService
 import com.netflix.graphql.dgs.*
+import com.netflix.graphql.dgs.internal.DgsWebMvcRequestData
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import org.dataloader.DataLoader
 import org.reactivestreams.Publisher
+import org.slf4j.LoggerFactory
+import org.springframework.web.context.request.WebRequest
 import java.util.concurrent.CompletableFuture
 
 @DgsComponent
 class ReviewsDataFetcher(private val reviewsService: ReviewsService) {
+
+    val log = LoggerFactory.getLogger(ReviewsDataFetcher::class.java)
 
     /**
      * This datafetcher will be called to resolve the "reviews" field on a Show.
@@ -38,15 +45,21 @@ class ReviewsDataFetcher(private val reviewsService: ReviewsService) {
      * For this to work correctly, the datafetcher needs to return a CompletableFuture.
      */
     @DgsData(parentType = DgsConstants.SHOW.TYPE_NAME, field = DgsConstants.SHOW.Reviews)
-    fun reviews(dfe: DgsDataFetchingEnvironment): CompletableFuture<List<Review>> {
-        //Instead of loading a DataLoader by name, we can use the DgsDataFetchingEnvironment and pass in the DataLoader classname.
-        val reviewsDataLoader: DataLoader<Int, List<Review>> = dfe.getDataLoader(ReviewsDataLoader::class.java)
-
-        //Because the reviews field is on Show, the getSource() method will return the Show instance.
+    suspend fun reviews(dfe: DgsDataFetchingEnvironment): List<Review>? = coroutineScope {
         val show : Show = dfe.getSource()
 
-        //Load the reviews from the DataLoader. This call is async and will be batched by the DataLoader mechanism.
-        return reviewsDataLoader.load(show.id)
+        log.info("before delay for ${show.title}")
+        delay(5000)
+        log.info("After delay ${show.title}")
+        reviewsService.reviewsForShow(show.id)
+
+//        //Instead of loading a DataLoader by name, we can use the DgsDataFetchingEnvironment and pass in the DataLoader classname.
+//        val reviewsDataLoader: DataLoader<Int, List<Review>> = dfe.getDataLoader(ReviewsDataLoader::class.java)
+//
+//        //Because the reviews field is on Show, the getSource() method will return the Show instance.
+//
+//        //Load the reviews from the DataLoader. This call is async and will be batched by the DataLoader mechanism.
+//        return reviewsDataLoader.load(show.id)
     }
 
     @DgsMutation

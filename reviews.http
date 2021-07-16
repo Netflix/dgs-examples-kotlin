@@ -1,0 +1,13 @@
+POST http://localhost:8080/graphql
+Content-Type: application/graphql
+
+{
+  shows{
+    title
+    reviews {
+      username
+    }
+  }
+}
+
+###

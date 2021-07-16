@@ -17,9 +17,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.10"
     kotlin("plugin.spring") version "1.5.0"
-    id("com.netflix.dgs.codegen") version "4.6.6"
+    id("com.netflix.dgs.codegen") version "5.0.2"
     id("org.springframework.boot") version "2.4.6"
 }
 
@@ -34,11 +34,14 @@ repositories {
 
 dependencies {
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release"))
+    implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("com.github.javafaker:javafaker:1.+")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

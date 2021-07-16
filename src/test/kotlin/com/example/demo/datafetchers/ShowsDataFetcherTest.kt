@@ -30,6 +30,7 @@ import com.example.demo.services.ShowsService
 import com.jayway.jsonpath.TypeRef
 import com.netflix.graphql.dgs.DgsQueryExecutor
 import com.netflix.graphql.dgs.autoconfig.DgsAutoConfiguration
+import com.netflix.graphql.dgs.autoconfig.DgsExtendedScalarsAutoConfiguration
 import com.netflix.graphql.dgs.client.codegen.GraphQLQueryRequest
 import graphql.ExecutionResult
 import org.assertj.core.api.Assertions.assertThat
@@ -42,7 +43,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import java.time.OffsetDateTime
 
-@SpringBootTest(classes = [ShowsDataFetcher::class, ReviewsDataFetcher::class, ReviewsDataLoader::class, DgsAutoConfiguration::class, DateTimeScalarRegistration::class])
+@SpringBootTest(classes = [ShowsDataFetcher::class, ReviewsDataFetcher::class, ReviewsDataLoader::class, DgsAutoConfiguration::class, DateTimeScalarRegistration::class, DgsExtendedScalarsAutoConfiguration::class])
 class ShowsDataFetcherTest {
 
     @Autowired
