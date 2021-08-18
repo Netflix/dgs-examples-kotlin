@@ -13,10 +13,14 @@ type Subscription {
 
 type Show {
     id: Int!
-    title: String!
+    title(format: TitleFormat): String!
     releaseYear: Int
     reviews: [Review]
     artwork: [Image]
+}
+
+input TitleFormat {
+    uppercase: Boolean
 }
 
 type Review {

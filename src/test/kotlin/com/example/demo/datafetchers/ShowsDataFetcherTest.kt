@@ -24,6 +24,7 @@ import com.example.demo.generated.client.ShowsProjectionRoot
 import com.example.demo.generated.types.Review
 import com.example.demo.generated.types.Show
 import com.example.demo.generated.types.SubmittedReview
+import com.example.demo.generated.types.TitleFormat
 import com.example.demo.scalars.DateTimeScalarRegistration
 import com.example.demo.services.ReviewsService
 import com.example.demo.services.ShowsService
@@ -126,7 +127,7 @@ class ShowsDataFetcherTest {
                 ShowsGraphQLQuery.Builder()
                     .build(),
                 ShowsProjectionRoot()
-                    .title()
+                    .title(TitleFormat(uppercase = true)).parent
                     .reviews()
                     .username()
                     .starScore()
