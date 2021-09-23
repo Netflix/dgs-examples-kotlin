@@ -29,7 +29,11 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
+    // ----
+    // Before we release the DGS Framework our CI Pipeline tests this project against the current snapshot.
+    // To support that we need to have `mavenLocal` support.
     mavenLocal()
+    // ----
 }
 
 dependencies {
