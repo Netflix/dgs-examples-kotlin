@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.6.10"
     kotlin("plugin.spring") version "1.5.0"
-    id("com.netflix.dgs.codegen") version "5.1.14"
+    id("com.netflix.dgs.codegen") version "5.1.16"
     id("org.springframework.boot") version "2.6.2"
 }
 
