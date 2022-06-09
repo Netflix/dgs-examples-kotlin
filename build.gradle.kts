@@ -21,7 +21,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.7.0"
     kotlin("plugin.spring") version "1.5.0"
     id("com.netflix.dgs.codegen") version "5.1.17"
     id("org.springframework.boot") version "2.6.3"
