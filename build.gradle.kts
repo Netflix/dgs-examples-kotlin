@@ -21,16 +21,16 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 
 plugins {
-    kotlin("jvm") version "1.7.10"
-    kotlin("plugin.spring") version "1.5.0"
+    kotlin("jvm") version "1.7.22"
+    kotlin("plugin.spring") version "1.7.22"
     id("com.netflix.dgs.codegen") version "5.6.3"
-    id("org.springframework.boot") version "2.6.3"
+    id("org.springframework.boot") version "2.7.4"
 }
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
 
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 repositories {
     mavenCentral()
     // ----
@@ -46,7 +46,7 @@ dependencies {
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.github.javafaker:javafaker:1.+")
+    implementation("net.datafaker:datafaker:1.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
 
