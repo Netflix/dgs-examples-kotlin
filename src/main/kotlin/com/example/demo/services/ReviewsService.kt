@@ -18,6 +18,7 @@ package com.example.demo.services
 
 import com.example.demo.generated.types.Review
 import com.example.demo.generated.types.SubmittedReview
+import jakarta.annotation.PostConstruct
 import net.datafaker.Faker
 import org.reactivestreams.Publisher
 import org.slf4j.LoggerFactory
@@ -30,8 +31,6 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.util.concurrent.TimeUnit
 import java.util.stream.IntStream
-import javax.annotation.PostConstruct
-import kotlin.streams.toList
 
 interface ReviewsService {
     fun reviewsForShow(showId: Int): List<Review>?
