@@ -16,7 +16,7 @@ It shows the following features:
 * [Subscriptions](https://github.com/Netflix/dgs-examples-kotlin/blob/main/src/main/kotlin/com/example/demo/datafetchers/ReviewsDataFetcher.kt#L64)
 * [Testing a subscription](https://github.com/Netflix/dgs-examples-kotlin/blob/main/src/test/kotlin/com/example/demo/datafetchers/ReviewSubscriptionTest.kt#L57)  
 * [Registering an optional scalar from graphql-java](https://github.com/Netflix/dgs-examples-kotlin/blob/main/src/main/kotlin/com/example/demo/scalars/DateTimeScalarRegistration.kt#L32)
-
+* [Pagination](https://netflix.github.io/dgs/advanced/relay-pagination/)
 Other examples
 ---
 

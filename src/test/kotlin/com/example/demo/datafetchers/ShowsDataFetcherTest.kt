@@ -130,6 +130,8 @@ class ShowsDataFetcherTest {
                 ShowsProjectionRoot()
                     .title(TitleFormat(uppercase = true)).parent
                     .reviews()
+                    .edges()
+                    .node()
                     .username()
                     .starScore()
             )
@@ -138,7 +140,7 @@ class ShowsDataFetcherTest {
             "data.shows[*]",
             object : TypeRef<List<Show>>() {})
         assertThat(shows.size).isEqualTo(1)
-        assertThat(shows[0].reviews?.size).isEqualTo(2)
+        assertThat(shows[0].reviews?.edges?.size).isEqualTo(2)
     }
 
     @Test

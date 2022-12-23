@@ -23,6 +23,8 @@ import com.example.demo.generated.types.Show
 import com.example.demo.generated.types.SubmittedReview
 import com.example.demo.services.ReviewsService
 import com.netflix.graphql.dgs.*
+import graphql.relay.Connection
+import graphql.relay.SimpleListConnection
 import org.dataloader.DataLoader
 import org.reactivestreams.Publisher
 import java.util.concurrent.CompletableFuture
@@ -38,7 +40,7 @@ class ReviewsDataFetcher(private val reviewsService: ReviewsService) {
      * For this to work correctly, the datafetcher needs to return a CompletableFuture.
      */
     @DgsData(parentType = DgsConstants.SHOW.TYPE_NAME, field = DgsConstants.SHOW.Reviews)
-    fun reviews(dfe: DgsDataFetchingEnvironment): CompletableFuture<List<Review>> {
+    fun reviews(dfe: DgsDataFetchingEnvironment): CompletableFuture<Connection<Review>> {
         //Instead of loading a DataLoader by name, we can use the DgsDataFetchingEnvironment and pass in the DataLoader classname.
         val reviewsDataLoader: DataLoader<Int, List<Review>> = dfe.getDataLoader(ReviewsDataLoader::class.java)
 
@@ -46,7 +48,9 @@ class ReviewsDataFetcher(private val reviewsService: ReviewsService) {
         val show : Show = dfe.getSource()
 
         //Load the reviews from the DataLoader. This call is async and will be batched by the DataLoader mechanism.
-        return reviewsDataLoader.load(show.id)
+        return reviewsDataLoader.load(show.id).thenApply {
+            SimpleListConnection(it ?: emptyList()).get(dfe)
+        }
     }
 
     @DgsMutation

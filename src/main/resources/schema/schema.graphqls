@@ -15,12 +15,22 @@ type Show {
     id: Int!
     title(format: TitleFormat): String!
     releaseYear: Int
-    reviews: [Review]
+    reviews: ReviewConnection
     artwork: [Image]
 }
 
 input TitleFormat {
     uppercase: Boolean
+}
+
+type ReviewConnection {
+    pageInfo: PageInfo
+    edges: [ReviewEdge]
+}
+
+type ReviewEdge {
+    cursor: String
+    node: Review
 }
 
 type Review {
@@ -37,6 +47,13 @@ input SubmittedReview {
 
 type Image {
     url: String
+}
+
+type PageInfo {
+    hasPreviousPage: Boolean!
+    hasNextPage: Boolean!
+    startCursor: String
+    endCursor: String
 }
 
 scalar DateTime
