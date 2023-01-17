@@ -30,8 +30,7 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.util.concurrent.TimeUnit
 import java.util.stream.IntStream
-import javax.annotation.PostConstruct
-import kotlin.streams.toList
+import org.springframework.beans.factory.InitializingBean
 
 interface ReviewsService {
     fun reviewsForShow(showId: Int): List<Review>?
@@ -46,15 +45,14 @@ interface ReviewsService {
  * If this was indeed backed by a database, it would be very important to avoid the N+1 problem, which means we need to use a DataLoader to call this class.
  */
 @Service
-class DefaultReviewsService(private val showsService: ShowsService): ReviewsService {
+class DefaultReviewsService(private val showsService: ShowsService): ReviewsService, InitializingBean {
     private val logger = LoggerFactory.getLogger(ReviewsService::class.java)
 
     private val reviews = mutableMapOf<Int, MutableList<Review>>()
     private lateinit var reviewsStream : FluxSink<Review>
     private lateinit var reviewsPublisher: ConnectableFlux<Review>
 
-    @PostConstruct
-    fun createReviews() {
+    override fun afterPropertiesSet() {
         val faker = Faker()
 
         //For each show we generate a random set of reviews.
