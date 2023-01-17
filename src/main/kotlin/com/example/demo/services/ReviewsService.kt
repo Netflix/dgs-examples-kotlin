@@ -30,7 +30,7 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.util.concurrent.TimeUnit
 import java.util.stream.IntStream
-import jakarta.annotation.PostConstruct
+import javax.annotation.PostConstruct
 import kotlin.streams.toList
 
 interface ReviewsService {
