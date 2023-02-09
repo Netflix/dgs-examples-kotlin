@@ -46,11 +46,12 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:5.5.1"))
+    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:6.0.0"))
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("jakarta.annotation:jakarta.annotation-api")
     implementation("net.datafaker:datafaker:1.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
