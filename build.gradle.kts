@@ -24,7 +24,7 @@ plugins {
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
     id("com.netflix.dgs.codegen") version "5.6.3"
-    id("org.springframework.boot") version "3.0.0"
+    id("org.springframework.boot") version "3.0.2"
 }
 
 group = "com.example"
