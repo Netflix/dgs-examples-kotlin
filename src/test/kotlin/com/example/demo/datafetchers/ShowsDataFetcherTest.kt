@@ -112,7 +112,7 @@ class ShowsDataFetcherTest {
             GraphQLQueryRequest(
                 ShowsGraphQLQuery.Builder()
                     .build(),
-                ShowsProjectionRoot().title()
+                ShowsProjectionRoot<Nothing, Nothing>().title()
             )
         val titles = dgsQueryExecutor.executeAndExtractJsonPath<List<String>>(
             graphQLQueryRequest.serialize(),
@@ -127,7 +127,7 @@ class ShowsDataFetcherTest {
             GraphQLQueryRequest(
                 ShowsGraphQLQuery.Builder()
                     .build(),
-                ShowsProjectionRoot()
+                ShowsProjectionRoot<Nothing, Nothing>()
                     .title(TitleFormat(uppercase = true)).parent
                     .reviews()
                     .username()
@@ -149,7 +149,7 @@ class ShowsDataFetcherTest {
                 AddReviewGraphQLQuery.Builder()
                     .review(SubmittedReview(1, "testuser", 5))
                     .build(),
-                AddReviewProjectionRoot()
+                AddReviewProjectionRoot<Nothing, Nothing>()
                     .username()
                     .starScore()
             )

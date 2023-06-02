@@ -88,7 +88,7 @@ class ReviewSubscriptionTest {
                 AddReviewGraphQLQuery.Builder()
                     .review(SubmittedReview(1, "testuser", 5))
                     .build(),
-                AddReviewProjectionRoot()
+                AddReviewProjectionRoot<Nothing, Nothing>()
                     .username()
                     .starScore()
             )
