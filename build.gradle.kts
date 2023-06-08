@@ -23,7 +23,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 plugins {
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
-    id("com.netflix.dgs.codegen") version "5.6.3"
+    id("com.netflix.dgs.codegen") version "5.11.1"
     id("org.springframework.boot") version "3.0.0"
 }
 
@@ -61,7 +61,7 @@ dependencies {
 }
 
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
-    generateClient = true
+    generateClientv2 = true
     packageName = "com.example.demo.generated"
 }
 
