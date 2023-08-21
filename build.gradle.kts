@@ -19,13 +19,23 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat.*
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
+buildscript {
+   repositories {
+      mavenLocal()
+   }
+   dependencies{
+      classpath ("com.netflix.graphql.dgs.codegen:graphql-dgs-codegen-gradle:5.13.0-SNAPSHOT")
+   }
+}
 
 plugins {
-    kotlin("jvm") version "1.7.22"
-    kotlin("plugin.spring") version "1.7.22"
-    id("com.netflix.dgs.codegen") version "5.11.1"
+    kotlin("jvm") version "1.9.0"
+    kotlin("plugin.spring") version "1.9.0"
+//    id("com.netflix.dgs.codegen") version "5.11.0"
     id("org.springframework.boot") version "3.0.0"
 }
+
+apply(plugin="com.netflix.dgs.codegen")
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
@@ -58,6 +68,7 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
+    //dgsCodegen("com.netflix.graphql.dgs:graphql-dgs-extended-scalars:6.0.0")
 }
 
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
