@@ -24,7 +24,7 @@ plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.spring") version "1.9.22"
     id("com.netflix.dgs.codegen") version "6.1.0"
-    id("org.springframework.boot") version "3.1.2"
+    id("org.springframework.boot") version "3.2.1"
     id("nebula.dependency-recommender") version "11.0.0"
     id("nebula.netflixoss") version "11.3.2"
 }
