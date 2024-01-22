@@ -26,7 +26,7 @@ plugins {
     id("com.netflix.dgs.codegen") version "6.1.3"
     id("org.springframework.boot") version "3.2.1"
     id("nebula.dependency-recommender") version "11.0.0"
-    id("nebula.netflixoss") version "11.3.2"
+    id("nebula.netflixoss") version "11.5.0"
 }
 
 group = "com.example"
