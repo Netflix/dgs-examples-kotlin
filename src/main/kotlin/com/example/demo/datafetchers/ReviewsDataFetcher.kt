@@ -43,10 +43,10 @@ class ReviewsDataFetcher(private val reviewsService: ReviewsService) {
         val reviewsDataLoader: DataLoader<Int, List<Review>> = dfe.getDataLoader(ReviewsDataLoader::class.java)
 
         //Because the reviews field is on Show, the getSource() method will return the Show instance.
-        val show : Show = dfe.getSource()
+        val show : Show? = dfe.getSource()
 
         //Load the reviews from the DataLoader. This call is async and will be batched by the DataLoader mechanism.
-        return reviewsDataLoader.load(show.id)
+        return reviewsDataLoader.load(show?.id)
     }
 
     @DgsMutation

@@ -20,6 +20,8 @@ import graphql.ExecutionResult
 import graphql.execution.instrumentation.InstrumentationContext
 import graphql.execution.instrumentation.InstrumentationState
 import graphql.execution.instrumentation.SimpleInstrumentation
+import graphql.execution.instrumentation.SimplePerformantInstrumentation
+import graphql.execution.instrumentation.parameters.InstrumentationCreateStateParameters
 import graphql.execution.instrumentation.parameters.InstrumentationExecutionParameters
 import graphql.execution.instrumentation.parameters.InstrumentationFieldFetchParameters
 import graphql.schema.DataFetcher
@@ -34,22 +36,22 @@ import java.util.concurrent.CompletableFuture
  * Example Instrumentation class that prints the time each datafetcher takes.
  */
 @Component
-class ExampleTracingInstrumentation: SimpleInstrumentation() {
+class ExampleTracingInstrumentation: SimplePerformantInstrumentation() {
 
     val logger : Logger = LoggerFactory.getLogger(ExampleTracingInstrumentation::class.java)
 
-    override fun createState(): InstrumentationState {
+    override fun createState(parameters: InstrumentationCreateStateParameters): InstrumentationState {
         return TraceState()
     }
 
-    override fun beginExecution(parameters: InstrumentationExecutionParameters): InstrumentationContext<ExecutionResult> {
-        val state: TraceState = parameters.getInstrumentationState()
+    override fun beginExecution(parameters: InstrumentationExecutionParameters, state: InstrumentationState): InstrumentationContext<ExecutionResult>? {
+        require(state is TraceState)
         state.traceStartTime = System.currentTimeMillis()
 
-        return super.beginExecution(parameters)
+        return super.beginExecution(parameters, state)
     }
 
-    override fun instrumentDataFetcher(dataFetcher: DataFetcher<*>, parameters: InstrumentationFieldFetchParameters): DataFetcher<*> {
+    override fun instrumentDataFetcher(dataFetcher: DataFetcher<*>, parameters: InstrumentationFieldFetchParameters, state: InstrumentationState): DataFetcher<*> {
 
         // We only care about user code
         if(parameters.isTrivialDataFetcher || parameters.executionStepInfo.path.toString().startsWith("/__schema")) {
@@ -75,12 +77,12 @@ class ExampleTracingInstrumentation: SimpleInstrumentation() {
         }
     }
 
-    override fun instrumentExecutionResult(executionResult: ExecutionResult, parameters: InstrumentationExecutionParameters): CompletableFuture<ExecutionResult> {
-        val state: TraceState = parameters.getInstrumentationState()
+    override fun instrumentExecutionResult(executionResult: ExecutionResult, parameters: InstrumentationExecutionParameters, state: InstrumentationState): CompletableFuture<ExecutionResult> {
+        require(state is TraceState)
         val totalTime = System.currentTimeMillis() - state.traceStartTime
         logger.info("Total execution time: ${totalTime}ms")
 
-        return super.instrumentExecutionResult(executionResult, parameters)
+        return super.instrumentExecutionResult(executionResult, parameters, state)
     }
 
     private fun findDatafetcherTag(parameters: InstrumentationFieldFetchParameters): String {
