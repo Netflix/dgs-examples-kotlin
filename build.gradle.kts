@@ -23,8 +23,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.spring") version "1.9.22"
-    id("com.netflix.dgs.codegen") version "6.1.3"
-    id("org.springframework.boot") version "3.2.1"
+    id("com.netflix.dgs.codegen") version "6.3.0"
+    id("org.springframework.boot") version "3.3.5"
     id("nebula.dependency-recommender") version "11.0.0"
     id("nebula.netflixoss") version "11.3.2"
 }
@@ -48,7 +48,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:8.5.6"))
+    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:9.1.3"))
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
     implementation("org.springframework.boot:spring-boot-starter-web:3.3.+")
