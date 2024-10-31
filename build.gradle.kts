@@ -21,7 +21,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 
 plugins {
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.22"
     id("com.netflix.dgs.codegen") version "6.3.0"
     id("org.springframework.boot") version "3.3.5"
@@ -48,15 +48,17 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:9.1.3"))
-    implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
+    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:9.2.0-SNAPSHOT"))
+    implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
+    implementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.1.4")
     implementation("org.springframework.boot:spring-boot-starter-web:3.3.+")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("jakarta.annotation:jakarta.annotation-api:3.0.+")
     implementation("net.datafaker:datafaker:2.1.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.9.0")
+    testImplementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.1.4")
 
     constraints {
         implementation("com.graphql-java:graphql-java") {
