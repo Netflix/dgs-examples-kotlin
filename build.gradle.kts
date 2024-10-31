@@ -58,6 +58,14 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.9.0")
 
+    constraints {
+        implementation("com.graphql-java:graphql-java") {
+            version {
+                strictly("[22,23[")
+            }
+        }
+    }
+
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.3.+")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
 }
