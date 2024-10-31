@@ -48,7 +48,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:9.2.0-SNAPSHOT"))
+    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:9.1.3"))
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
     implementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.1.4")
