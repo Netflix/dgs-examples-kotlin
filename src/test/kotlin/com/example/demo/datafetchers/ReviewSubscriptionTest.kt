@@ -16,20 +16,17 @@
 
 package com.example.demo.datafetchers
 
-import com.example.demo.generated.client.AddReviewGraphQLQuery
-import com.example.demo.generated.client.AddReviewProjectionRoot
 import com.example.demo.generated.types.Review
-import com.example.demo.generated.types.SubmittedReview
 import com.example.demo.scalars.DateTimeScalarRegistration
 import com.example.demo.services.DefaultReviewsService
 import com.example.demo.services.ShowsService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.netflix.graphql.dgs.DgsQueryExecutor
 import com.netflix.graphql.dgs.autoconfig.DgsAutoConfiguration
-import com.netflix.graphql.dgs.client.codegen.GraphQLQueryRequest
 import com.netflix.graphql.dgs.scalars.UploadScalar
 import graphql.ExecutionResult
 import org.assertj.core.api.Assertions
+import org.intellij.lang.annotations.Language
 import org.junit.jupiter.api.Test
 import org.reactivestreams.Publisher
 import org.reactivestreams.Subscriber
@@ -84,16 +81,30 @@ class ReviewSubscriptionTest {
     }
 
     private fun addReview(): ExecutionResult {
-        val graphQLQueryRequest =
-            GraphQLQueryRequest(
-                AddReviewGraphQLQuery.Builder()
-                    .review(SubmittedReview(1, "testuser", 5))
-                    .build(),
-                AddReviewProjectionRoot<Nothing, Nothing>()
-                    .username()
-                    .starScore()
-            )
+//        val graphQLQueryRequest =
+//            GraphQLQueryRequest(
+//                AddReviewGraphQLQuery.Builder()
+//                    .review(SubmittedReview(1, "testuser", 5))
+//                    .build(),
+//                AddReviewProjectionRoot<Nothing, Nothing>()
+//                    .username()
+//                    .starScore()
+//            )
 
-        return dgsQueryExecutor.execute(graphQLQueryRequest.serialize())
+        @Language("GraphQL")
+        val query = """
+        mutation AddReview {
+            addReview(review: {
+                showId: 1
+                username: "testuser"
+                starScore: 5
+            }) {
+                username
+                starScore
+            }   
+        }
+        """.trimIndent()
+
+        return dgsQueryExecutor.execute(query)
     }
 }

@@ -23,7 +23,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.22"
-    id("com.netflix.dgs.codegen") version "6.3.0"
+//    id("com.netflix.dgs.codegen") version "6.3.0"
     id("org.springframework.boot") version "3.3.5"
     id("io.spring.dependency-management") version "1.1.6"
     id("nebula.dependency-recommender") version "11.0.0"
@@ -57,6 +57,7 @@ dependencyManagement {
 dependencies {
     //implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:9.1.3"))
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
+    implementation("com.netflix.graphql.dgs:graphql-dgs-client")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
     implementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.1.4")
     implementation("org.springframework.boot:spring-boot-starter-web:3.3.+")
@@ -79,10 +80,10 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
 }
 
-tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
-    generateClientv2 = true
-    packageName = "com.example.demo.generated"
-}
+//tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
+//    generateClientv2 = true
+//    packageName = "com.example.demo.generated"
+//}
 
 
 tasks.withType<Test> {
