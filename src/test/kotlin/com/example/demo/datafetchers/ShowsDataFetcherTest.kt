@@ -23,8 +23,8 @@ import com.example.demo.scalars.DateTimeScalarRegistration
 import com.example.demo.services.ReviewsService
 import com.example.demo.services.ShowsService
 import com.netflix.graphql.dgs.DgsQueryExecutor
-import com.netflix.graphql.dgs.autoconfig.DgsAutoConfiguration
 import com.netflix.graphql.dgs.scalars.UploadScalar
+import com.netflix.graphql.dgs.test.EnableDgsTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Disabled
@@ -35,7 +35,8 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import java.time.OffsetDateTime
 
-@SpringBootTest(classes = [ShowsDataFetcher::class, ReviewsDataFetcher::class, ReviewsDataLoader::class, DgsAutoConfiguration::class, DateTimeScalarRegistration::class, UploadScalar::class])
+@SpringBootTest(classes = [ShowsDataFetcher::class, ReviewsDataFetcher::class, ReviewsDataLoader::class,DateTimeScalarRegistration::class, UploadScalar::class])
+@EnableDgsTest
 class ShowsDataFetcherTest {
 
     @Autowired

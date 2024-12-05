@@ -76,6 +76,7 @@ dependencies {
         }
     }
 
+    testImplementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter-test")
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.3.+")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
 }
