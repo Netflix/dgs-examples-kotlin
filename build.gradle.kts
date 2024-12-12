@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat.*
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 
 plugins {
-    kotlin("jvm") version "1.9.25"
+    kotlin("jvm") version "2.1.0"
     kotlin("plugin.spring") version "1.9.22"
-//    id("com.netflix.dgs.codegen") version "6.3.0"
     id("org.springframework.boot") version "3.3.5"
     id("io.spring.dependency-management") version "1.1.6"
     id("nebula.dependency-recommender") version "11.0.0"
@@ -60,7 +57,7 @@ dependencies {
     implementation("com.netflix.graphql.dgs:graphql-dgs-client")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
     implementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.1.4")
-    implementation("org.springframework.boot:spring-boot-starter-web:3.3.+")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("jakarta.annotation:jakarta.annotation-api:3.0.+")
     implementation("net.datafaker:datafaker:2.1.0")
@@ -77,15 +74,9 @@ dependencies {
     }
 
     testImplementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter-test")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:3.3.+")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
 }
-
-//tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
-//    generateClientv2 = true
-//    packageName = "com.example.demo.generated"
-//}
-
 
 tasks.withType<Test> {
     useJUnitPlatform()
