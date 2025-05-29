@@ -46,7 +46,7 @@ class ReviewsDataFetcher(private val reviewsService: ReviewsService) {
         val show : Show? = dfe.getSource()
 
         //Load the reviews from the DataLoader. This call is async and will be batched by the DataLoader mechanism.
-        return reviewsDataLoader.load(show?.id)
+        return show?.id?.let { reviewsDataLoader.load(it) } ?: CompletableFuture.completedFuture(emptyList())
     }
 
     @DgsMutation
