@@ -20,7 +20,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
     kotlin("jvm") version "2.1.0"
-    kotlin("plugin.spring") version "1.9.22"
+    kotlin("plugin.spring") version "2.1.0"
     id("org.springframework.boot") version "3.3.5"
     id("io.spring.dependency-management") version "1.1.6"
     id("nebula.dependency-recommender") version "11.0.0"
@@ -61,8 +61,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("jakarta.annotation:jakarta.annotation-api:3.0.+")
     implementation("net.datafaker:datafaker:2.1.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
     testImplementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.1.4")
 
     constraints {
