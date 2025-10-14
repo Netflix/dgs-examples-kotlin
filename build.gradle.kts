@@ -43,6 +43,8 @@ repositories {
     // To support that we need to have `mavenLocal` support.
     mavenLocal()
     // ----
+
+    maven {url = uri("https://repo.spring.io/milestone/")}
 }
 
 dependencyManagement {
