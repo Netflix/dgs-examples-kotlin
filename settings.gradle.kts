@@ -14,4 +14,10 @@
  * limitations under the License.
  */
 
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven {url = uri("https://repo.spring.io/milestone/")}
+    }
+}
 rootProject.name = "dgs-examples-kotlin"

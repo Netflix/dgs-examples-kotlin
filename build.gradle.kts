@@ -20,11 +20,9 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
     kotlin("jvm") version "2.1.0"
-    kotlin("plugin.spring") version "2.1.0"
-    id("org.springframework.boot") version "3.3.5"
+    kotlin("plugin.spring") version "2.3.0-Beta1"
+    id("org.springframework.boot") version "4.0.0-M3"
     id("io.spring.dependency-management") version "1.1.6"
-    id("nebula.dependency-recommender") version "11.0.0"
-    id("nebula.netflixoss") version "11.6.0"
 }
 
 group = "com.example"
@@ -49,31 +47,23 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:9.1.3")
+        mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:10.5.0-SNAPSHOT")
     }
 }
 
 dependencies {
-    //implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:9.1.3"))
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-client")
     implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
-    implementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.1.4")
+    implementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:2.0.0-RC2")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("jakarta.annotation:jakarta.annotation-api:3.0.+")
     implementation("net.datafaker:datafaker:2.1.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
-    testImplementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.1.4")
 
-    constraints {
-        implementation("com.graphql-java:graphql-java") {
-            version {
-                strictly("[22,23[")
-            }
-        }
-    }
+
 
     testImplementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter-test")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

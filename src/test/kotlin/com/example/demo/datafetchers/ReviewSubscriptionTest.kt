@@ -33,7 +33,7 @@ import org.reactivestreams.Subscriber
 import org.reactivestreams.Subscription
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.util.concurrent.CopyOnWriteArrayList
 
 /**
@@ -48,7 +48,7 @@ class ReviewSubscriptionTest {
     @Autowired
     lateinit var dgsQueryExecutor: DgsQueryExecutor
 
-    @MockBean
+    @MockitoBean
     lateinit var showsService: ShowsService
 
     @Test

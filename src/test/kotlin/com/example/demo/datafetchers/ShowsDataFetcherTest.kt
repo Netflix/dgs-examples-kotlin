@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import java.time.OffsetDateTime
 
 @SpringBootTest(classes = [ShowsDataFetcher::class, ReviewsDataFetcher::class, ReviewsDataLoader::class,DateTimeScalarRegistration::class, UploadScalar::class])
@@ -42,10 +42,10 @@ class ShowsDataFetcherTest {
     @Autowired
     lateinit var dgsQueryExecutor: DgsQueryExecutor
 
-    @MockBean
+    @MockitoBean
     lateinit var showsService: ShowsService
 
-    @MockBean
+    @MockitoBean
     lateinit var reviewsService: ReviewsService
 
     @BeforeEach
