@@ -3,12 +3,13 @@ package com.example.demo
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 /**
  * Example of a smoke test that will interact with the HTTP /graphql endpoint via MockMVC
@@ -24,18 +25,17 @@ class DgsExampleSmokeTest {
     @Test
     fun `Queries for shows`() {
         mvc.perform(
-            MockMvcRequestBuilders
-                .post("/graphql")
+            post("/graphql")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                     """
-                        | { 
-                        |   "query": "query some_movies { shows { title releaseYear } }" 
+                        | {
+                        |   "query": "query some_movies { shows { title releaseYear } }"
                         | }""".trimMargin()
                 )
-        ).andExpect(MockMvcResultMatchers.status().isOk)
+        ).andExpect(status().isOk)
             .andExpect(
-                MockMvcResultMatchers.content().json(
+                content().json(
                     """
                     | {
                     |  "data": {

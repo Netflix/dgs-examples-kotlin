@@ -21,7 +21,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 plugins {
     kotlin("jvm") version "2.1.0"
     kotlin("plugin.spring") version "2.3.0-Beta1"
-    id("org.springframework.boot") version "4.0.0-M3"
+    id("org.springframework.boot") version "4.0.0-RC1"
     id("io.spring.dependency-management") version "1.1.6"
 }
 
@@ -67,6 +67,7 @@ dependencies {
 
     testImplementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter-test")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-webmvc-test")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
 }
 
