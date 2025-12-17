@@ -49,7 +49,7 @@ dependencyManagement {
     imports {
         mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:11.0.0")
     }
-}ShowsDataFetcherTest
+}
 
 dependencies {
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
