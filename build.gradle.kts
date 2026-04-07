@@ -21,7 +21,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 plugins {
     kotlin("jvm") version "2.1.0"
     kotlin("plugin.spring") version "2.1.0"
-    id("org.springframework.boot") version "3.3.5"
+    id("org.springframework.boot") version "4.0.5"
     id("io.spring.dependency-management") version "1.1.6"
     id("nebula.dependency-recommender") version "11.0.0"
     id("nebula.netflixoss") version "11.6.0"
