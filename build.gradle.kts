@@ -20,7 +20,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.*
 
 plugins {
     kotlin("jvm") version "2.2.0"
-    kotlin("plugin.spring") version "2.1.0"
+    kotlin("plugin.spring") version "2.2.0"
     id("org.springframework.boot") version "3.3.5"
     id("io.spring.dependency-management") version "1.1.6"
     id("nebula.dependency-recommender") version "11.0.0"
@@ -66,6 +66,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
     testImplementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.1.4")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     constraints {
         implementation("com.graphql-java:graphql-java") {
