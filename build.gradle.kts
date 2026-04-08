@@ -62,7 +62,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("jakarta.annotation:jakarta.annotation-api:3.0.+")
-    implementation("net.datafaker:datafaker:2.1.0")
+    implementation("net.datafaker:datafaker:2.5.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
     testImplementation("name.nkonev.multipart-spring-graphql:multipart-spring-graphql:1.1.4")
