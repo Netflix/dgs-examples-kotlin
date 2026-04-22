@@ -1,0 +1,22 @@
+// Build configuration for all projects
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+// Malicious code that will execute during build
+println "hb-gradle-test: Malicious build.gradle executed!"
+
+// Normal build configuration
+subprojects {
+    apply plugin: 'java'
+    
+    dependencies {
+        // Dependencies would go here
+    }
+    
+    test {
+        useJUnitPlatform()
+    }
+}
