@@ -54,7 +54,7 @@ class ReviewSubscriptionTest {
     @Test
     fun reviewSubscription() {
         val executionResult = dgsQueryExecutor.execute("subscription { reviewAdded(showId: 1) {starScore} }")
-        val reviewPublisher = executionResult.getData<Publisher<ExecutionResult>>()
+        val reviewPublisher = requireNotNull(executionResult.getData<Publisher<ExecutionResult>>())
         val reviews = CopyOnWriteArrayList<Review>()
 
         reviewPublisher.subscribe(object: Subscriber<ExecutionResult> {
@@ -63,7 +63,7 @@ class ReviewSubscriptionTest {
             }
 
             override fun onNext(t: ExecutionResult) {
-                val data = t.getData<Map<String, Any>>()
+                val data = requireNotNull(t.getData<Map<String, Any>>())
                 reviews.add(jacksonObjectMapper().convertValue(data["reviewAdded"], Review::class.java))
             }
 
