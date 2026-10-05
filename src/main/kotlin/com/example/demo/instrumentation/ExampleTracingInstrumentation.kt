@@ -43,14 +43,14 @@ class ExampleTracingInstrumentation: SimplePerformantInstrumentation() {
         return TraceState()
     }
 
-    override fun beginExecution(parameters: InstrumentationExecutionParameters, state: InstrumentationState): InstrumentationContext<ExecutionResult>? {
+    override fun beginExecution(parameters: InstrumentationExecutionParameters, state: InstrumentationState?): InstrumentationContext<ExecutionResult>? {
         require(state is TraceState)
         state.traceStartTime = System.currentTimeMillis()
 
         return super.beginExecution(parameters, state)
     }
 
-    override fun instrumentDataFetcher(dataFetcher: DataFetcher<*>, parameters: InstrumentationFieldFetchParameters, state: InstrumentationState): DataFetcher<*> {
+    override fun instrumentDataFetcher(dataFetcher: DataFetcher<*>, parameters: InstrumentationFieldFetchParameters, state: InstrumentationState?): DataFetcher<*> {
 
         // We only care about user code
         if(parameters.isTrivialDataFetcher || parameters.executionStepInfo.path.toString().startsWith("/__schema")) {
@@ -76,7 +76,7 @@ class ExampleTracingInstrumentation: SimplePerformantInstrumentation() {
         }
     }
 
-    override fun instrumentExecutionResult(executionResult: ExecutionResult, parameters: InstrumentationExecutionParameters, state: InstrumentationState): CompletableFuture<ExecutionResult> {
+    override fun instrumentExecutionResult(executionResult: ExecutionResult, parameters: InstrumentationExecutionParameters, state: InstrumentationState?): CompletableFuture<ExecutionResult> {
         require(state is TraceState)
         val totalTime = System.currentTimeMillis() - state.traceStartTime
         logger.info("Total execution time: ${totalTime}ms")
@@ -85,14 +85,15 @@ class ExampleTracingInstrumentation: SimplePerformantInstrumentation() {
     }
 
     private fun findDatafetcherTag(parameters: InstrumentationFieldFetchParameters): String {
-        val type = parameters.executionStepInfo.parent.type
+        val executionStepInfo = requireNotNull(parameters.executionStepInfo)
+        val type = requireNotNull(executionStepInfo.parent).type
         val parentType = if (type is GraphQLNonNull) {
             type.wrappedType as GraphQLObjectType
         } else {
             type as GraphQLObjectType
         }
 
-        return "${parentType.name}.${parameters.executionStepInfo.path.segmentName}"
+        return "${parentType.name}.${executionStepInfo.path.segmentName}"
     }
 
     data class TraceState(var traceStartTime: Long = 0): InstrumentationState
